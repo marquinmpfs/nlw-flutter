@@ -6,12 +6,12 @@ class AwnserWidget extends StatelessWidget {
   final bool isRight;
   final bool isSelected;
 
-  const AwnserWidget(
-      {Key? key,
-      required this.title,
-      this.isRight = false,
-      this.isSelected = false})
-      : super(key: key);
+  const AwnserWidget({
+    Key? key,
+    required this.title,
+    this.isRight = false,
+    this.isSelected = false
+  }): super(key: key);
 
   Color get _selectedColorRight => isSelected
       ? isRight
@@ -41,7 +41,7 @@ class AwnserWidget extends StatelessWidget {
     ? isRight 
       ? AppTextStyles.bodyDarkGreen 
       : AppTextStyles.bodyDarkRed 
-      : AppTextStyles.body;
+    : AppTextStyles.body;
 
   IconData get _selectedIconRight => isRight ? Icons.check : Icons.close;
 
@@ -61,17 +61,17 @@ class AwnserWidget extends StatelessWidget {
           )
         ),
         child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Expanded(child: Text(title, style: _selectedTextStyleRight)),
           Container(
             width: 24,
             height: 24,
             decoration: BoxDecoration(
-                color: _selectedColorRight,
-                borderRadius: BorderRadius.circular(500),
-                border: Border.fromBorderSide(
-                  BorderSide(color: _selectedBorderRight)
-                )
+              color: _selectedColorRight,
+              borderRadius: BorderRadius.circular(500),
+              border: Border.fromBorderSide(
+                BorderSide(color: _selectedBorderRight)
+              )
             ),
             child: isSelected ? Icon(_selectedIconRight, size: 16) : null,
           )
