@@ -1,9 +1,17 @@
-import 'package:DevQuiz/home/widgets/chart/chart_widget.dart';
-import '../../../core/core.dart';
 import 'package:flutter/material.dart';
 
+import 'package:DevQuiz/home/widgets/chart/chart_widget.dart';
+import 'package:DevQuiz/shared/models/user_model.dart';
+
+import '../../../core/core.dart';
+
 class ScoreCardWidget extends StatelessWidget {
-  const ScoreCardWidget({Key? key}) : super(key: key);
+  final UserModel user;
+
+  const ScoreCardWidget({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +20,7 @@ class ScoreCardWidget extends StatelessWidget {
       child: Container(
         height: 136,
         decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(15)
-        ),
+            color: AppColors.white, borderRadius: BorderRadius.circular(15)),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
@@ -22,7 +28,7 @@ class ScoreCardWidget extends StatelessWidget {
             children: [
               Expanded(
                 flex: 1,
-                child: ChartWidget(),
+                child: ChartWidget(user: user),
               ),
               Expanded(
                 flex: 3,
@@ -33,7 +39,8 @@ class ScoreCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Vamos começar", style: AppTextStyles.heading),
-                      Text("Complete os desafios e avance em conhecimento", style: AppTextStyles.body)
+                      Text("Complete os desafios e avance em conhecimento",
+                          style: AppTextStyles.body)
                     ],
                   ),
                 ),
