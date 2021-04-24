@@ -6,14 +6,14 @@ import 'package:DevQuiz/shared/models/awnser_model.dart';
 class AwnserWidget extends StatelessWidget {
   final AwnserModel awnser;
   final bool isSelected;
-  final VoidCallback onTap;
+  final ValueChanged<bool> onSelected;
   final bool disabled;
 
   const AwnserWidget({
     Key? key,
     required this.awnser,
     this.isSelected = false,
-    required this.onTap,
+    required this.onSelected,
     required this.disabled,
   }) : super(key: key);
 
@@ -55,8 +55,10 @@ class AwnserWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: IgnorePointer(
         ignoring: disabled,
-              child: GestureDetector(
-          onTap: onTap,
+        child: GestureDetector(
+          onTap: () {
+            onSelected(awnser.isRight);
+          },
           child: Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -64,22 +66,22 @@ class AwnserWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.fromBorderSide(
                     BorderSide(color: _selectedBorderCardRight))),
-            child:
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(child: Text(awnser.title, style: _selectedTextStyleRight)),
+                  Expanded(
+                      child:
+                          Text(awnser.title, style: _selectedTextStyleRight)),
                   Container(
                     width: 24,
                     height: 24,
                     decoration: BoxDecoration(
-                      color: _selectedColorRight,
-                      borderRadius: BorderRadius.circular(500),
-                      border: Border.fromBorderSide(
-                          BorderSide(color: _selectedBorderRight)
-                      )
-                    ),
-                    child: isSelected ? Icon(_selectedIconRight, size: 16) : null,
+                        color: _selectedColorRight,
+                        borderRadius: BorderRadius.circular(500),
+                        border: Border.fromBorderSide(
+                            BorderSide(color: _selectedBorderRight))),
+                    child:
+                        isSelected ? Icon(_selectedIconRight, size: 16) : null,
                   )
                 ]),
           ),
